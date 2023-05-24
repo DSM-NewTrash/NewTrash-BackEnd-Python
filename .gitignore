@@ -1,0 +1,5 @@
+.gitignoer
+.env
+.DS_Store
+venv
+.idea
