@@ -35,5 +35,5 @@ def logins(session: Session, body: Login):
 def is_certification(session: Session, body: Certification, user: User):
     user.certificate = body.certificate
     user.is_certificate = True
-
+    session.commit()
     return HTTPException(status_code=status.HTTP_201_CREATED, detail="success")
