@@ -3,29 +3,18 @@ from fastapi import FastAPI
 import uvicorn
 
 from server.app import api_router
-
-from sqlalchemy import create_engine
-from sqlalchemy.orm import declarative_base
-
-from server.config import MySQL
-
-engine = create_engine(
-    url=MySQL.MY_SQL_URL,
-
-)
-
-Base = declarative_base()
-
-
-def create_all_table():
-    from server.core.badge.badge import Badge
-    from server.core.user.user import User
-
-    Base.metadata.create_all(bind=engine)
-
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
-create_all_table()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins="*",
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.include_router(api_router)
 
 if __name__ == '__main__':
