@@ -15,4 +15,4 @@ class User(Base):
     quiz_limit_count = Column(INTEGER, default=0)
     exp = Column(INTEGER, default=0)
     is_certificate = Column(Boolean, default=True)
-    badge_level = Column(INTEGER, ForeignKey('tbl_badge.id'), default=1)
+    badge_id = Column(INTEGER, ForeignKey('tbl_badge.id'))
