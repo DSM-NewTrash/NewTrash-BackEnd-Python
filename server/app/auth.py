@@ -1,8 +1,10 @@
 from server.core import session_scope
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 
-from ..core.user.schema.auth import SignUp, Login
-from ..utill.auth import create_user, logins, check_id
+from ..core.user.schema.auth import SignUp, Login, Certification
+from ..core.user.user import User
+from ..utill.auth import create_user, logins, is_certification
+from ..utill.security import get_current_user
 
 app = APIRouter(prefix="/users")
 
@@ -19,7 +21,8 @@ async def login(body: Login):
         return logins(session=session, body=body)
 
 
-@app.get("/{user_id}")
-async def check_ids(user_id: str):
+@app.post("/profile")
+async def login(body: Certification, user: User = Depends(get_current_user)):
     with session_scope() as session:
-        return check_id(session=session, user_id=user_id)
+        return is_certification(session=session, body=body, user=user)
+

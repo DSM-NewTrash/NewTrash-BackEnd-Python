@@ -1,7 +1,7 @@
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
-from ..core.user.schema.auth import SignUp, Login
+from ..core.user.schema.auth import SignUp, Login, Certification
 from ..core.user.user import User
 from ..utill.security import get_password_hash, verify_password, create_access_token
 
@@ -32,5 +32,8 @@ def logins(session: Session, body: Login):
     }
 
 
-def check_id(session: Session, user_id):
-    pass
+def is_certification(session: Session, body: Certification, user: User):
+    user.certificate = body.certificate
+    user.is_certificate = True
+
+    return HTTPException(status_code=status.HTTP_201_CREATED, detail="success")
