@@ -1,3 +1,5 @@
+from sqlalchemy.orm import relationship
+
 from server.core import Base
 
 from sqlalchemy import Column, VARCHAR, INTEGER, ForeignKey, Boolean
@@ -16,3 +18,5 @@ class User(Base):
     exp = Column(INTEGER, default=0)
     is_certificate = Column(Boolean, default=False)
     badge_id = Column(INTEGER, ForeignKey('tbl_badge.level'), default=1)
+
+    badge = relationship("Badge")
