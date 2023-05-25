@@ -1,4 +1,5 @@
 from server.core import Base
+from server.core.badge.badge import Badge
 
 from sqlalchemy import Column, VARCHAR, INTEGER, ForeignKey, Boolean
 
