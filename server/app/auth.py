@@ -24,5 +24,5 @@ async def login(body: Login):
 @app.post("/profile")
 async def login(body: Certification, user: User = Depends(get_current_user)):
     with session_scope() as session:
-        return is_certification(session=session, body=body, user=user)
+        return is_certification(session=session, body=body, user_id=user.id)
 
