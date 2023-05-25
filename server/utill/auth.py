@@ -33,7 +33,8 @@ def logins(session: Session, body: Login):
 
 
 def is_certification(session: Session, body: Certification, user: User):
-    user.certificate = body.certificate
-    user.is_certificate = True
-    session.commit()
+    session.query(User).filter_by(User.id == user.id).update({
+        "is_certificate": 1,
+        "certificate": body.certificate
+    })
     return HTTPException(status_code=status.HTTP_201_CREATED, detail="success")
