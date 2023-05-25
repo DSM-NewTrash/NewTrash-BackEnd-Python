@@ -19,6 +19,6 @@ def verify_password(plain_password: str, hashed_password: str):
 
 
 def create_access_token(user_id: str):
-    exp = datetime.utcnow() + timedelta(minutes=int(SECURITY.access_time))
+    exp = datetime.utcnow() + timedelta(days=30)
     encoded_jwt = jwt.encode({"exp": exp, "sub": user_id}, SECURITY.SECRET_KEY, algorithm='HS256')
     return encoded_jwt
