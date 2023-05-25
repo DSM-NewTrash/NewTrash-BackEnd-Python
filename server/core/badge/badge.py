@@ -6,6 +6,6 @@ from server.core import Base
 class Badge(Base):
     __tablename__ = 'tbl_badge'
 
-    id = Column('id', INTEGER, autoincrement=True, primary_key=True)
-    name = Column('name', VARCHAR(7), nullable=True)
-    path = Column('path', VARCHAR(360), nullable=True)
+    level = Column(INTEGER, primary_key=True)
+    name = Column(VARCHAR(7), nullable=True)
+    path = Column(VARCHAR(360), nullable=True)

@@ -14,5 +14,5 @@ class User(Base):
     introduce = Column(VARCHAR(30), nullable=False, default='')
     quiz_limit_count = Column(INTEGER, default=0)
     exp = Column(INTEGER, default=0)
-    is_certificate = Column(Boolean, default=True)
-    badge_id = Column(INTEGER, ForeignKey('tbl_badge.id'))
+    is_certificate = Column(Boolean, default=False)
+    badge_id = Column(INTEGER, ForeignKey('tbl_badge.id'), default=1)
