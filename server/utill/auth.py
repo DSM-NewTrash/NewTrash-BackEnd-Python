@@ -22,10 +22,10 @@ def logins(session: Session, body: Login):
     user = session.query(User).filter(User.id == body.id).first()
 
     if not user:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+        return HTTPException(status_code=status.HTTP_404_NOT_FOUND)
 
     if not verify_password(plain_password=body.password, hashed_password=user.password):
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN)
+        return HTTPException(status_code=status.HTTP_403_FORBIDDEN)
 
     return {
         "access_token": create_access_token(user_id=user.id)
@@ -37,3 +37,13 @@ def is_certification(session: Session, body: Certification, user_id: str):
     user.certificate = body.certificate
     user.is_certificate = True
     return HTTPException(status_code=status.HTTP_201_CREATED, detail="success")
+
+
+def quiz_count(session: Session, user_id: str):
+    user = session.query(User).filter(User.id == user_id).first()
+    if not user:
+        return HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+    return {
+        "count": user.quiz_limit_count
+    }
+

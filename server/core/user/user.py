@@ -13,7 +13,7 @@ class User(Base):
     profile = Column(VARCHAR(360), default=" ")
     point = Column(INTEGER, default=0)
     introduce = Column(VARCHAR(30), nullable=False, default='')
-    quiz_limit_count = Column(INTEGER, default=0)
+    quiz_limit_count = Column(INTEGER, default=80)
     exp = Column(INTEGER, default=0)
     certificate = Column(VARCHAR(255), nullable=True)
     is_certificate = Column(Boolean)
