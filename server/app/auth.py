@@ -2,7 +2,7 @@ from server.core import session_scope
 from fastapi import APIRouter, Depends, status
 
 from ..core.user.schema.auth import SignUp, Login, Certification
-from ..utill.auth import create_user, logins, is_certification, quiz_count
+from ..utill.auth import create_user, logins, is_certification, quiz_count, get_profile
 from ..utill.security import get_current_user
 
 app = APIRouter(prefix="/users")
@@ -30,3 +30,8 @@ async def certification(body: Certification, user: str = Depends(get_current_use
 async def get_quiz_count(user: str = Depends(get_current_user)):
     with session_scope() as session:
         return quiz_count(session=session, user_id=user)
+
+@app.get("/", status_code=status.HTTP_200_OK)
+async def profile(user: str = Depends(get_current_user)):
+    with session_scope() as session:
+        return get_profile(session=session, user_id=user)
