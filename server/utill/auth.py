@@ -51,7 +51,7 @@ def quiz_count(session: Session, user_id: str):
     }
 
 
-def get_profile(session: Session, user_id: str):
+def get_exp_badge(session: Session, user_id: str):
     user = session.query(User).filter(User.id == user_id).first()
     badge = session.query(Badge).filter(Badge.level == user.badge_id).first()
     if not user:
@@ -63,4 +63,23 @@ def get_profile(session: Session, user_id: str):
         "exp": user.exp,
         "max_exp": max_exp[user.badge_id],
         "point": user.point
+    }
+
+
+def get_profile(session: Session, user_id: str):
+    user = session.query(User).filter(User.id == user_id).first()
+    badge = session.query(Badge).filter(Badge.level == user.badge_id).first()
+    if not user:
+        return HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+    return {
+        "id": user.id,
+        "nickname": user.nickname,
+        "profile": user.profile,
+        "introduce": user.introduce,
+        "level": user.badge_id,
+        "badge": badge.name,
+        "exp": user.exp,
+        "point": user.point,
+        "certificate": user.certificate,
+        "is_certificate": user.is_certificate
     }
