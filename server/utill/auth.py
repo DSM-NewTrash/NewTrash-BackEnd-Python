@@ -78,8 +78,12 @@ def get_profile(session: Session, user_id: str):
         "introduce": user.introduce,
         "level": user.badge_id,
         "badge": badge.name,
+        "badge_image": badge.path,
         "exp": user.exp,
         "point": user.point,
         "certificate": user.certificate,
         "is_certificate": user.is_certificate
     }
+
+
+# def update_profile():

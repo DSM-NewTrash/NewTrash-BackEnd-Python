@@ -42,3 +42,9 @@ async def exp_badge(user: str = Depends(get_current_user)):
 async def profile(user: str = Depends(get_current_user)):
     with session_scope() as session:
         return get_profile(session=session, user_id=user)
+
+
+# @app.patch("/profile", status_code=status.HTTP_204_NO_CONTENT)
+# async def profile(user: str = Depends(get_current_user)):
+#     with session_scope() as session:
+#         return
