@@ -1,3 +1,4 @@
+import boto3
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
 from passlib.context import CryptContext
@@ -44,3 +45,10 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
         except JWTError:
             raise credentials_exception
         return user_id
+
+
+def s3_connection():
+    s3 = boto3.client('s3', aws_access_key_id=SECURITY.aws_access_key,
+                      aws_secret_access_key=SECURITY.aws_secret_key,
+                      region_name=SECURITY.region)
+    return s3

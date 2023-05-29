@@ -1,5 +1,6 @@
 from server.core import Base
 from server.core.badge.badge import Badge
+from server.config import SECURITY
 
 from sqlalchemy import Column, VARCHAR, INTEGER, ForeignKey, Boolean
 
@@ -10,7 +11,7 @@ class User(Base):
     id = Column(VARCHAR(12), primary_key=True)
     nickname = Column(VARCHAR(12), nullable=False)
     password = Column(VARCHAR(60), nullable=False)
-    profile = Column(VARCHAR(360), default=" ")
+    profile = Column(VARCHAR(360), default=SECURITY.user_default_image)
     point = Column(INTEGER, default=0)
     introduce = Column(VARCHAR(30), nullable=False, default='')
     quiz_limit_count = Column(INTEGER, default=80)
