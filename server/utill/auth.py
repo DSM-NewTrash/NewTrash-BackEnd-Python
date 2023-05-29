@@ -1,7 +1,7 @@
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
-from ..core.user.schema.auth import SignUp, Login, Certification
+from ..core.user.schema.auth import SignUp, Login, Certification, Profile
 from ..core.user.user import User
 from ..core.badge.badge import Badge
 from ..utill.security import get_password_hash, verify_password, create_access_token
@@ -86,4 +86,15 @@ def get_profile(session: Session, user_id: str):
     }
 
 
-# def update_profile():
+def update_profile(session: Session, body: Profile, user_id: str):
+    user = session.query(User).filter(User.id == user_id).first()
+    if not user:
+        return HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+    if body.profile:
+        user.profile = body.profile
+    if body.nickname:
+        user.nickname = body.nickname
+    if body.introduce:
+        user.introduce = body.introduce
+
+    return HTTPException(status_code=status.HTTP_204_NO_CONTENT)

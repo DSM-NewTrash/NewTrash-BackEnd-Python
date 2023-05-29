@@ -1,4 +1,5 @@
-from pydantic import BaseModel, constr
+from pydantic import BaseModel, constr, Field
+from typing import Union
 
 
 class SignUp(BaseModel):
@@ -14,3 +15,9 @@ class Login(BaseModel):
 
 class Certification(BaseModel):
     certificate: constr(min_length=1, max_length=255)
+
+
+class Profile(BaseModel):
+    profile: Union[str, None]
+    nickname: Union[str, None]
+    introduce: Union[str, None]

@@ -1,8 +1,8 @@
 from server.core import session_scope
 from fastapi import APIRouter, Depends, status
 
-from ..core.user.schema.auth import SignUp, Login, Certification
-from ..utill.auth import create_user, logins, is_certification, quiz_count, get_exp_badge, get_profile
+from ..core.user.schema.auth import SignUp, Login, Certification, Profile
+from ..utill.auth import create_user, logins, is_certification, quiz_count, get_exp_badge, get_profile, update_profile
 from ..utill.security import get_current_user
 
 app = APIRouter(prefix="/users")
@@ -44,7 +44,7 @@ async def profile(user: str = Depends(get_current_user)):
         return get_profile(session=session, user_id=user)
 
 
-# @app.patch("/profile", status_code=status.HTTP_204_NO_CONTENT)
-# async def profile(user: str = Depends(get_current_user)):
-#     with session_scope() as session:
-#         return
+@app.patch("/profile", status_code=status.HTTP_204_NO_CONTENT)
+async def profile(body: Profile, user: str = Depends(get_current_user)):
+    with session_scope() as session:
+        return update_profile(session=session, body=body, user_id=user)
