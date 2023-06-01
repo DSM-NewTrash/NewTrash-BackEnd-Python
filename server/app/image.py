@@ -10,5 +10,5 @@ app = APIRouter(prefix="/image")
 
 
 @app.post("")
-async def image(files: List[UploadFile] = File()):
+async def image(files: List[UploadFile] = File(...)):
     return upload(files=files)

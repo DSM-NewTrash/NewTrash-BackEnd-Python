@@ -59,7 +59,7 @@ def get_exp_badge(session: Session, user_id: str):
     return {
         "nickname": user.nickname,
         "level": user.badge_id,
-        "badge_image": badge.path,
+        "badge_image": f"https://new-trash.s3.ap-northeast-2.amazonaws.com/badge/{user.badge_id}.png",
         "exp": user.exp,
         "max_exp": max_exp[user.badge_id],
         "point": user.point
@@ -78,7 +78,7 @@ def get_profile(session: Session, user_id: str):
         "introduce": user.introduce,
         "level": user.badge_id,
         "badge": badge.name,
-        "badge_image": badge.path,
+        "badge_image": f"https://new-trash.s3.ap-northeast-2.amazonaws.com/badge/mypage/{user.badge_id}.png",
         "exp": user.exp,
         "point": user.point,
         "certificate": user.certificate,
