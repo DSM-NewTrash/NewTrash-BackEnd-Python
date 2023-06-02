@@ -38,7 +38,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
             detail="Could not validate credentials"
         )
         try:
-            payload = jwt.decode(token, SECURITY.SECRET_KEY, algorithms='HS256')
+            payload = jwt.decode(token, SECURITY.SECRET_KEY, algorithms=['HS256'])
             user_id: str = payload.get("sub")
             if user_id is None:
                 raise credentials_exception
