@@ -27,7 +27,7 @@ def verify_password(plain_password: str, hashed_password: str):
 
 def create_access_token(user_id: str):
     exp = datetime.utcnow() + timedelta(days=30)
-    encoded_jwt = jwt.encode({"exp": exp, "sub": user_id}, SECURITY.SECRET_KEY, algorithm=['HS256'])
+    encoded_jwt = jwt.encode({"exp": exp, "sub": user_id}, SECURITY.SECRET_KEY, algorithm='HS256')
     return encoded_jwt
 
 
@@ -38,7 +38,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
             detail="Could not validate credentials"
         )
         try:
-            payload = jwt.decode(token, SECURITY.SECRET_KEY, algorithms=['HS256'])
+            payload = jwt.decode(token, SECURITY.SECRET_KEY, algorithms='HS256')
             user_id: str = payload.get("sub")
             if user_id is None:
                 raise credentials_exception
