@@ -4,7 +4,7 @@ import uvicorn
 
 from server.app import api_router
 from fastapi.middleware.cors import CORSMiddleware
-
+from server.config import SECURITY
 app = FastAPI()
 
 app.add_middleware(
